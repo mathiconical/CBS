@@ -191,7 +191,7 @@
 <!-- <script src="scripts/w2ui-1.5.js.map"></script>> -->
 <!-- <script src="scripts/w2ui-1.5.min.js"></script> -->
 <script type="module">
-  import { w2grid } from 'https://rawgit.com/vitmalina/w2ui/master/dist/w2ui.es6.min.js'
+  import { w2grid, w2alert, query } from 'https://rawgit.com/vitmalina/w2ui/master/dist/w2ui.es6.min.js'
 
   var grid = new w2grid({
     name: 'grid',
@@ -206,9 +206,10 @@
       lineNumbers: true,
       toolbarAdd: true,
       toolbarDelete: true,
+      toolbarSave: true,
     },
     columns: [
-      {field: 'recid', text: 'ID', size: '30px'},
+      {field: 'recid', text: 'ID', size: '30px', hidden: true},
       {field: 'waypoint', type: 'int', text: 'Waypoint ID', size: '8%', editable: { type: 'int'}},
       {field: 'argument', type: 'text', text: 'Argumentos', size: '30%', editable: { type: 'text'}},
       {field: 'function', type: 'text', text: 'Funções', size: '40%', editable: { type: 'text'}},
@@ -224,14 +225,103 @@
       {recid: 1, waypoint: 1, argument: '1-attack, 5-2', function: '2-use_rope, 5-define_zoom', walk: 'w, s, d'},
     ],
     toolbar: {
-      items: [],
-      onClick: (target, data) => {
+      items: [
+        { type: 'spacer' },
+        { type: 'button', id: 'process', text: 'Gerar Script', icon: 'bi bi-cpu' },
+      ],
+      onClick: (target, event) => {
         if(target == 'w2ui-add'){
           let length = grid.records.length;
 
           let last_id = grid.records[length - 1]?.recid;
           
-          grid.add({recid: last_id + 1, waypoint: 1, argument: '', function: '', walk: ''})
+          grid.add({recid: last_id + 1, waypoint: 1, argument: '', function: '', walk: ''});
+        }
+
+        if(target == 'process') {
+          let records = gridRecords();
+
+          if(!records.length) return;
+
+          //! create script fileStream
+          var scriptConvertion = `WAYPOINT = caves.total_waypoints(${records.length})
+
+`;
+          records.forEach((elemento, index) => {
+            scriptConvertion += `WAYPOINT[${index}].add_wp(${elemento.waypoint})
+`;
+
+            //! convert arguments
+            if(elemento.argument != '' || elemento.argument?.length > 0){
+              var args = elemento.argument.split(',');
+
+              var _ = "";
+
+              args?.forEach(value => {
+                let splitted_args = value.split('-');
+                _ += splitted_args[0].trim() + ", " + "\'" + splitted_args[1].trim() + "\', ";
+              });
+
+              _ = _.trim();
+              _ = _.substr(0, _.length - 1);
+
+              scriptConvertion += `WAYPOINT[${index}].add_args(${_})
+`;
+            }
+
+            //! convert walk-actions
+            if(elemento.walk != '' || elemento.walk?.length > 0){
+              var arrayString = elemento.walk?.trim()?.split(',');
+
+              scriptConvertion += `WAYPOINT[${index}].add_action([`;
+
+              for(let i = 0; i < arrayString.length; i++) {
+                if(i >= arrayString.length - 1){
+                  scriptConvertion += `\'${arrayString[i]}\'`;
+                } else {
+                  scriptConvertion += `\'${arrayString[i]}\',`;
+                }
+              }
+
+              scriptConvertion += `])
+`;
+            }
+
+            //! convert functions
+            if(elemento.function != '' || elemento.function?.length > 0){
+              var funcs = elemento.function.split(',');
+
+              var _ = "";
+
+              funcs?.forEach(value => {
+                let splitted_funcs = value.split('-');
+                _ += splitted_funcs[0].trim() + ", " + splitted_funcs[1].trim() + ", ";
+              });
+
+              _ = _.trim();
+              _ = _.substr(0, _.length - 1);
+
+              scriptConvertion += `WAYPOINT[${index}].add_function(${_})
+`;
+            }
+            scriptConvertion += `
+`;
+          });
+
+          async function writeFile() {
+            var myBlob = new Blob(
+              [scriptConvertion],
+              { type: '*' },
+            );
+
+            const fileHandle = await window.showSaveFilePicker();
+            const fileStream = await fileHandle.createWritable();
+
+            await fileStream.write(myBlob);
+            await fileStream.close();
+          }
+
+          writeFile();
         }
       },
     },
@@ -239,6 +329,14 @@
       query('#' + event.detail.box_id).html('<div style="padding: 10px; height: 100px">Expanded content</div>')
     }
   });
+
+  window.showSelection = function () {
+    w2alert(grid.getSelection());
+  }
+
+  window.gridRecords = () => {
+    return grid.records;
+  }
 
 </script>
 </html>
