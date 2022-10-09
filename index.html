@@ -248,7 +248,7 @@
           if(!records.length) return;
 
           //! create script fileStream
-          var scriptConvertion = `WAYPOINT = caves.total_waypoints(${records.length})
+          var scriptConvertion = `WAYPOINT = total_waypoints(${records.length})
 
 `;
           records.forEach((elemento, index) => {
