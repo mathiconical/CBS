@@ -191,7 +191,7 @@
 <!-- <script src="scripts/w2ui-1.5.js.map"></script>> -->
 <!-- <script src="scripts/w2ui-1.5.min.js"></script> -->
 <script type="module">
-  import { w2grid, w2alert, query } from 'https://rawgit.com/vitmalina/w2ui/master/dist/w2ui.es6.min.js'
+  import { w2grid, w2alert, query, w2popup } from 'https://rawgit.com/vitmalina/w2ui/master/dist/w2ui.es6.min.js'
 
   var grid = new w2grid({
     name: 'grid',
@@ -312,6 +312,10 @@
 `;
           });
 
+          let scriptConvertionModal = scriptConvertion.replaceAll(')', ')<br>');
+
+          popup_script('Script Gerado', scriptConvertionModal, 600, 500);
+
           async function writeFile() {
             var myBlob = new Blob(
               [scriptConvertion],
@@ -336,6 +340,10 @@
 
   window.showSelection = function () {
     w2alert(grid.getSelection());
+  }
+
+  window.popup_script = (_title, _content, _width = 500, _heigth = 300) => {
+    w2popup.open({title: _title, body: _content, modal: true, width: _width, heigth: _heigth });
   }
 
   window.gridRecords = () => {
