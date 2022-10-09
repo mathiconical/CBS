@@ -233,9 +233,13 @@
         if(target == 'w2ui-add'){
           let length = grid.records.length;
 
-          let last_id = grid.records[length - 1]?.recid;
-          
-          grid.add({recid: last_id + 1, waypoint: 1, argument: '', function: '', walk: ''});
+          if (!length) {
+            grid.add({ recid: last_id + 1, waypoint: 1, argument: '1-change_aflag', function: '2-use_rope, 3-define_zoom', walk: 'd' });
+          } else {
+            let last_id = grid.records[length - 1].recid;
+
+            grid.add({recid: last_id + 1, waypoint: 1, argument: '', function: '', walk: ''});
+          }
         }
 
         if(target == 'process') {
