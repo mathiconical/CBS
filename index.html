@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <!-- CSS Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- CSS Bootstrap ICONS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <!-- CSS projeto -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/map.css">
+  <!-- W2UI CSS -->
+  <!-- <link rel="stylesheet" href="css/w2ui-1.5.min.css"> -->
+  <link rel="stylesheet" type="text/css" href="https://rawgit.com/vitmalina/w2ui/master/dist/w2ui.min.css">
+  <title>CaveBot Script</title>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg fixed-top bg-primary-color" id="navbar">
+    <div class="container py-0">
+      <a href="#" class="navbar-brand">
+        <i class="bi bi-robot cbs-icon"></i>
+        <span>CBS</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-itens" aria-controls="navbar-itens" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar-itens">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a href="#" class="nav-link active primary-color" aria-current="page">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#grid" class="nav-link primary-color">Criar</a>
+          </li>
+          <li class="nav-item">
+            <a href="#tibiamapio" class="nav-link primary-color">Mapa</a>
+          </li>
+          <li class="nav-item">
+            <a href="#footer" class="nav-link primary-color">Sobre</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- SLIDER -->
+  <div class="container" id="slider-container">
+    <div class="carousel slide" id="slider" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button class="active" data-bs-target="#slider" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" type="button"></button>
+        <button data-bs-target="#slider" data-bs-slide-to="1" aria-label="Slide 2" type="button"></button>
+        <button data-bs-target="#slider" data-bs-slide-to="2" aria-label="Slide 3" type="button"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="images/img1.png" alt="Image-1" class="d-block w-100 carousel-image">
+          <div class="carousel-caption">
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="images/img2.png" alt="Image-2" class="d-block w-100 carousel-image">
+          <div class="carousel-caption">
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="images/img3.png" alt="Image-3" class="d-block w-100 carousel-image">
+          <div class="carousel-caption">
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#slider" data-bs-slide="prev">
+        <i class="bi bi-chevron-compact-left"></i>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#slider" data-bs-slide="next">
+        <i class="bi bi-chevron-compact-right"></i>
+        <span class="visually-hidden">Próximo</span>
+      </button>
+    </div>
+    <!-- Banners -->
+    <div class="col-12 col-md-10 offset-md-1" id="banners">
+      <div class="row">
+        <div class="col-12 col-md-4">
+          <div class="card text-center">
+            <i class="bi bi-activity life-color"></i>
+            <div class="card-body">
+              <h5 class="card-title primary-color">Revisado</h5>
+              <p class="card-text secondary-color">Sistema atualizado pela própria comunidade.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="card text-center">
+            <i class="bi bi-currency-dollar money-color"></i>
+            <div class="card-body">
+              <h5 class="card-title primary-color">Financeiro</h5>
+              <p class="card-text secondary-color">Atinja sua meta financeira com um script preciso.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="card text-center">
+            <i class="bi bi-person-hearts heart-color"></i>
+            <div class="card-body">
+              <h5 class="card-title primary-color">Livre</h5>
+              <p class="card-text secondary-color">Sistema open source e feito com muita dedicação.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- CREATE WAYPOINT -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div id="grid" style="width: 100%; height: 450px;"></div>
+      </div>
+    </div>
+  </div>
+  <!-- MAP CREDITS -->
+  <div class="container" id="tibiamapio">
+    <div class="row">
+      <div class="col-md-12 col-md-6">
+        <div class="alert alert-info" role="alert">
+          <p>Mapa obtido no <span><strong>TibiaMaps.io</strong></span>, quer acompanhar o trabalho deles, baixar o mapa completo ou conferir todas as funcionalidades? <span><a target="_blank" href="https://tibiamaps.io/map">Clique aqui!</a></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- MAP -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-md-4">
+        <div class="map_wiki justify-content-center">
+          <div id="map" style="width: 100%; height: 100%; position: relative; outline: none;"
+            class="leaflet-container leaflet-touch leaflet-grab leaflet-touch-drag" tabindex="0">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- FOOTER -->
+  <footer class="container-fluid bg-dark-color" id="footer">
+    <div class="container">
+      <div class="row">
+        <!-- TOP -->
+        <div class="col-12" id="footer-top">
+          <div class="row justify-content-between">
+            <div class="col-4"><h2>CBS</h2></div>
+            <div class="col-4" id="social-icons">
+              <i class="bi bi-linkedin"></i>
+              <i class="bi bi-instagram"></i>
+              <i class="bi bi-youtube"></i>
+              <i class="bi bi-github"></i>
+            </div>
+          </div>
+        </div>
+        <!-- DETAILS -->
+        <div class="col-12" id="footer-details"></div>
+        <!-- BOTTOM -->
+        <div class="col-12" id="footer-bottom">
+          <div class="row justify-content-between">
+            <div class="col-12 col-md-12">
+              <p class="secondary-color">O jogo Tibia e todas as imagens contidas nesse site são propriedades de CipSoft GmbH.</p>
+              <p class="secondary-color">CBS - 2022</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+<!-- JS Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!-- JS Projeto -->
+<!-- <script src="scripts/main.js"></script> -->
+<script src="scripts/map.js"></script>
+<!-- JQUERY -->
+<script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
+  integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+<!-- JS W2UI -->
+<!-- <script src="scripts/w2ui-1.5.js.map"></script>> -->
+<!-- <script src="scripts/w2ui-1.5.min.js"></script> -->
+<script type="module">
+  import { w2grid } from 'https://rawgit.com/vitmalina/w2ui/master/dist/w2ui.es6.min.js'
+
+  var grid = new w2grid({
+    name: 'grid',
+    box: '#grid',
+    header: 'Waypoints',
+    reorderRows: true,
+    box: '#grid',
+    show: {
+      header: true,
+      footer: true,
+      toolbar: true,
+      lineNumbers: true,
+      toolbarAdd: true,
+      toolbarDelete: true,
+    },
+    columns: [
+      {field: 'recid', text: 'ID', size: '30px'},
+      {field: 'waypoint', type: 'int', text: 'Waypoint ID', size: '8%', editable: { type: 'int'}},
+      {field: 'argument', type: 'text', text: 'Argumentos', size: '30%', editable: { type: 'text'}},
+      {field: 'function', type: 'text', text: 'Funções', size: '40%', editable: { type: 'text'}},
+      {field: 'walk', type: 'text', text: 'Movimentos', size: '23%', editable: { type: 'text'}},
+    ],
+    searches: [
+      {type: 'int', field: 'recid', label: 'ID'},
+      {type: 'int', field: 'waypoint', label: 'Waypoint ID'},
+      {type: 'text', field: 'argument', label: 'Argumento'},
+      {type: 'text', field: 'function', label: 'Função'},
+    ],
+    records: [
+      {recid: 1, waypoint: 1, argument: '1-attack, 5-2', function: '2-use_rope, 5-define_zoom', walk: 'w, s, d'},
+    ],
+    toolbar: {
+      items: [],
+      onClick: (target, data) => {
+        if(target == 'w2ui-add'){
+          let length = grid.records.length;
+
+          let last_id = grid.records[length - 1]?.recid;
+          
+          grid.add({recid: last_id + 1, waypoint: 1, argument: '', function: '', walk: ''})
+        }
+      },
+    },
+    onExpand(event) {
+      query('#' + event.detail.box_id).html('<div style="padding: 10px; height: 100px">Expanded content</div>')
+    }
+  });
+
+</script>
+</html>
