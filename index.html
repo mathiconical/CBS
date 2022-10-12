@@ -147,6 +147,21 @@
       </div>
     </div>
   </div>
+  <!-- SOBRE -->
+  <div class="container" id="sobre">
+    <div class="row">
+      <div class="col-md-12 col-md-6">
+        <div class="alert alert-dark" role="alert">
+          <p class="text-break fw-normal">
+              O site foi feito para gerar <span class="text-decoration-underline fst-italic"><strong id="script_tooltip">scripts</strong></span> para um <span class="text-decoration-underline fst-italic"><strong id="bot_tooltip">BOT</strong></span> de um jogo <span class="text-decoration-underline fst-italic"><strong id="mmorpg_tooltip">MMRO RPG</strong></span> chamado <span><strong><a class="text-decoration-none" href="https://www.tibia.com/abouttibia/?subtopic=whatistibia" target="_blank">Tíbia</a></strong></span> de maneira rápida usando um grid. Entre em contato para obter a documentação com todas as informações para criar seu script.
+          </p>
+          <p class="text-break fw-normal">
+            Não possúi uma versão do BOT ainda? Entre em contato: <span><strong class="fw-bolder text-dark">netinho340@gmail.com / jneto340@outlook.com</strong></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- FOOTER -->
   <footer class="container-fluid bg-dark-color" id="footer">
     <div class="container">
@@ -191,6 +206,32 @@
 <!-- <script src="scripts/w2ui-1.5.js.map"></script>> -->
 <!-- <script src="scripts/w2ui-1.5.min.js"></script> -->
 <script type="module">
+
+  const tooltip_options_object = {
+    tooltip_script: {
+      title: 'É um conjunto de dados que será consumido pela aplicação principal sem precisar alterar o programa caso haja alterações no script.',
+      animation: true,
+      delay: 100,
+    },
+    tooltip_bot: {
+      title: 'É a aplicação em si, feita para consumir os scripts e realizar comandos ou até mesmo jogar o jogo, sem a necessidade de uma pessoa.',
+      animation: true,
+      delay: 100,
+    },
+    tooltip_mmorpg: {
+      title: 'Massive Multiplayer Online Role Play Game.',
+      animation: true,
+      delay: 100,
+    },
+  };
+
+  const tooltip_script = document.getElementById('script_tooltip')
+  const tooltip_bot = document.getElementById('bot_tooltip')
+  const tooltip_mmorpg = document.getElementById('mmorpg_tooltip')
+  const tooltip_script_object = new bootstrap.Tooltip(tooltip_script, tooltip_options_object['tooltip_script'])
+  const tooltip_bot_object = new bootstrap.Tooltip(tooltip_bot, tooltip_options_object['tooltip_bot'])
+  const tooltip_mmorpg_object = new bootstrap.Tooltip(tooltip_mmorpg, tooltip_options_object['tooltip_mmorpg'])
+
   import { w2grid, w2alert, query, w2popup } from 'https://rawgit.com/vitmalina/w2ui/master/dist/w2ui.es6.min.js'
 
   var grid = new w2grid({
