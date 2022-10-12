@@ -263,7 +263,7 @@
       {type: 'text', field: 'function', label: 'Função'},
     ],
     records: [
-      {recid: 1, waypoint: 1, argument: '1-attack, 5-2', function: '2-use_rope, 5-define_zoom', walk: 'w, s, d'},
+      {recid: 1, waypoint: 1, argument: '', function: '', walk: ''},
     ],
     toolbar: {
       items: [
@@ -275,11 +275,11 @@
           let length = grid.records.length;
 
           if (!length) {
-            grid.add({ recid: last_id + 1, waypoint: 1, argument: '1-change_aflag', function: '2-use_rope, 3-define_zoom', walk: 'd' });
+            grid.add({ recid: 1, waypoint: 1, argument: '', function: '', walk: '' });
           } else {
-            let last_id = grid.records[length - 1].recid;
+            let last_rec = grid.records[length - 1];
 
-            grid.add({recid: last_id + 1, waypoint: 1, argument: '', function: '', walk: ''});
+            grid.add({recid: last_rec.recid + 1, waypoint: last_rec.waypoint + 1, argument: '', function: '', walk: ''});
           }
         }
 
